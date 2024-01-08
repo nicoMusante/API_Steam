@@ -118,7 +118,7 @@ def falta_de_parametros6():
 
 """ def UsersWorstDeveloper( año : int ): Devuelve el top 3 de desarrolladoras con juegos MENOS recomendados por usuarios para el año dado. (reviews.recommend = False y comentarios negativos)
 Ejemplo de retorno: [{"Puesto 1" : X}, {"Puesto 2" : Y},{"Puesto 3" : Z}] """
-@app.get('/developersminaño/{anio}')
+@app.get('/empresasminaño/{anio}')
 def UsersWorstDeveloper( anio : int ):
     #primero validamos que el año que se introdujo está efectivamente en el dataframe 
     if anio not in games_and_reviews['posted_year'].unique():
@@ -141,12 +141,12 @@ def UsersWorstDeveloper( anio : int ):
     return result_list
 
 #con estos 2 endpoints validamos que se haya ingresado un año a travez de la url
-@app.get('/developersminaño/')
+@app.get('/empresasminaño/')
 def falta_de_parametros7():
     return "Debe proporcionarse un año para recibir una respuesta del servidor"
         
 
-@app.get('/developersminaño')
+@app.get('/empresasminaño')
 def falta_de_parametros8():
     return "Debe proporcionarse un año para recibir una respuesta del servidor"
 
@@ -154,7 +154,7 @@ def falta_de_parametros8():
 
 """ def sentiment_analysis( empresa desarrolladora : str ): Según la empresa desarrolladora, se devuelve un diccionario con el nombre de la desarrolladora como llave y una lista con la cantidad total de registros de reseñas de usuarios que se encuentren categorizados con un análisis de sentimiento como valor.
 Ejemplo de retorno: {'Valve' : [Negative = 182, Neutral = 120, Positive = 278]} """
-@app.get('/developersentiment/{empresa_desarrolladora}')
+@app.get('/opinionesempresa/{empresa_desarrolladora}')
 def sentiment_analysis_by_developer(empresa_desarrolladora: str):
 
     #validamos que la empresa desarrolladora que se introdujo está efectivamente en el dataframe 
@@ -185,11 +185,11 @@ def sentiment_analysis_by_developer(empresa_desarrolladora: str):
     return result_dict
 
 #con estos 2 endpoints validamos que se haya ingresado una empresa desarrolladora a travez de la url
-@app.get('/developersentiment/')
+@app.get('/opinionesempresa/')
 def falta_de_parametros9():
     return "Debe proporcionarse una empresa desarrolladora para recibir una respuesta del servidor"
         
 
-@app.get('/developersentiment')
+@app.get('/opinionesempresa')
 def falta_de_parametros10():
     return "Debe proporcionarse una empresa desarrolladora para recibir una respuesta del servidor"
