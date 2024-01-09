@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 import pandas as pd
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.preprocessing import StandardScaler
 
 app=FastAPI()
 
@@ -193,3 +195,48 @@ def falta_de_parametros9():
 @app.get('/opinionesempresa')
 def falta_de_parametros10():
     return "Debe proporcionarse una empresa desarrolladora para recibir una respuesta del servidor"
+
+
+
+# preparamos los datos para entrenar el modelo de machine learning
+games_and_reviews.fillna(0, inplace=True)  # Asegurarse de que no hay valores nulos
+
+#esleccionamos columnas de género
+genre_columns = ["Action",	"Casual", "Indie",	"Simulation", "Strategy", "Free to Play", "RPG", "Sports", "Adventure", "Racing","Early Access", "Massively Multiplayer", "Animation &amp; Modeling", "Video Production", "Utilities", "Web Publishing", "Education", "Software Training", "Design &amp; Illustration", "Audio Production", "Photo Editing", "Accounting"] 
+game_features = games_and_reviews.set_index('item_id')[genre_columns]
+
+#noremalizamos las características
+scaler = StandardScaler()
+game_features_scaled = scaler.fit_transform(game_features)
+
+#calculamos similitud coseno
+cosine_sim = cosine_similarity(game_features_scaled)
+
+#mapeamos índices y títulos
+indices = pd.Series(games_and_reviews.index, index=games_and_reviews['item_id']).drop_duplicates()
+
+""" def recomendacion_juego( id de producto ): Ingresando el id de producto, deberíamos recibir una lista 
+con 5 juegos recomendados similares al ingresado. """
+@app.get("/recomendacionjuego/{idJuego}")
+def recomendacion_juego(idJuego: int):
+    # verificamos si el ID del juego existe en el dataset
+    if idJuego not in indices:
+        return "El ID del juego no existe en el dataset."
+
+    idx = indices[idJuego]
+    sim_scores = list(enumerate(cosine_sim[idx].flatten()))  # Aplanar el array
+    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+    sim_scores = sim_scores[1:6]
+    game_indices = [i[0] for i in sim_scores]
+    return games_and_reviews['title'].iloc[game_indices].tolist()
+
+
+#con estos 2 endpoints validamos que se haya ingresado un id de un juego a travez de la url
+@app.get('/recomendacionjuego')
+def falta_de_parametros11():
+    return "Debe proporcionarse un id de un juego para recibir una respuesta del servidor"
+        
+
+@app.get('/recomendacionjuego/')
+def falta_de_parametros12():
+    return "Debe proporcionarse un id de un juego para recibir una respuesta del servidor"
