@@ -227,8 +227,16 @@ def recomendacion_juego(idJuego: int):
     sim_scores = list(enumerate(cosine_sim[idx].flatten()))  # Aplanar el array
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
     sim_scores = sim_scores[1:6]
-    game_indices = [i[0] for i in sim_scores]
-    return games_and_reviews['title'].iloc[game_indices].tolist()
+    
+    """ tengo la necesitdad de hacer este try: debido a que 
+    tuve que recortar mi dataframe para poder hacer un deploy de la api y ocurre que 
+    todos aquellos ID's que antes estaban en el dataframe "games_and_reviews" dan error 
+    en el servidor y no entran al if de la linea 223 que valida si el id está en el dataframe """
+    try:
+        game_indices = [i[0] for i in sim_scores]
+        return games_and_reviews['title'].iloc[game_indices].tolist()
+    except:
+        return "El ID del juego no existe en el dataset."
 
 
 #con estos 2 endpoints validamos que se haya ingresado un id de un juego a travez de la url
