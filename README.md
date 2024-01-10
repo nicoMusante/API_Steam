@@ -8,6 +8,7 @@ Este proyecto de ciencia de datos se centra en el análisis de un conjunto de da
 - Python
 - Pandas para manipulación de datos
 - Matplotlib y Seaborn para graficación de datos
+- Scikit Learn para entrenar un modelo de Machine Learning
 - Fast Api y Uvicorn para levantar la api
 
 ## Instalación y Configuración
