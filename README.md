@@ -14,7 +14,7 @@ Este proyecto de ciencia de datos se centra en el análisis de un conjunto de da
 
 1.Abrir una Terminal o Línea de Comandos: Necesitarás una ventana de terminal (en Linux o macOS) o línea de comandos (en Windows) para ejecutar los comandos de instalación.
 
-2.Navegar al Directorio del Archivo requirements.txt: Utiliza el comando cd para cambiar al directorio donde se encuentra tu archivo requirements.txt. Por ejemplo, si tu archivo está en el escritorio, el comando podría ser algo como:
+2.Navegar al Directorio del Archivo requirements.txt. Por ejemplo, si tu archivo está en el escritorio, el comando podría ser algo como:
 ```bash
 cd "ruta/de/proyecto"
 ``` 
