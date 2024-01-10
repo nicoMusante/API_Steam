@@ -1,3 +1,4 @@
+![Data Science and Gaming](https://github.com/nicoMusante/API_Steam/blob/main/ETL_MachineLearning.png?raw=true)
 
 # Proyecto Individual Machine Learning Operations: Plataforma de juegos
 
