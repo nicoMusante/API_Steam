@@ -31,6 +31,8 @@ pillow
 platformdirs
 prompt-toolkit
 psutil
+requests==2.26.0
+Flask==2.1.0
 pure-eval
 pydantic
 pydantic_core
