@@ -5,7 +5,7 @@ from sklearn.preprocessing import StandardScaler
 
 app=FastAPI()
 
-games_and_reviews=pd.read_csv("ETL/games_and_reviews.csv")
+games_and_reviews=pd.read_csv("games_and_reviews_sample.csv")
 games_and_reviews=games_and_reviews.iloc[:, 1:]
 
 
